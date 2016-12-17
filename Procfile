@@ -1,1 +1,1 @@
-web: gunicorn watsup.wsgi
+web: gunicorn watsup:app
