@@ -15,9 +15,9 @@ app = Flask(__name__,
 
 # Database connection
 # ----------------------------------------------------------------------------
+app.config['MONGO_URI'] = config.get('db', 'MONGODB_URI')
 mongo = PyMongo(app)
 
-app.config['MONGO_URI'] = config.get('db', 'MONGODB_URI')
 
 if config.getboolean('mode', 'debug'):
     # Add a trailing slash, so the base tag URL will be "/watsup/"

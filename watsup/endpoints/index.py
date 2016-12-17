@@ -17,7 +17,5 @@ index = Blueprint('index',
 def index_page():
     """Renders index page.
     """
-
     users = mongo.db.users.find({})
-
     return render_template('index.html', data=list(users))
