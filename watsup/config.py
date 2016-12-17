@@ -18,3 +18,5 @@ config.read('watsup/config.ini')
 # }
 
 MONGO_URL = os.environ.get('WATSUP_MONGO_URL')
+
+
