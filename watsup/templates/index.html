@@ -13,6 +13,13 @@
         Hello
     </div>
 
+    {% for user in data %}
+        <div> {{loop.index}}: User {{ user.username }} says "{{ user.secret }}" </div>
+    {% else %}
+        <div> Too scared to share a secret? </div>
+    {% endfor %}
+
+
     {% include 'footer.html' %}
 
 </div>

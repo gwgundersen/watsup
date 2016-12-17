@@ -3,7 +3,8 @@
 
 from flask import Flask, g, session as flask_session, render_template
 
-from flask.ext.sqlalchemy import SQLAlchemy
+# from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.pymongo import PyMongo
 
 from watsup.config import config
 
@@ -12,20 +13,22 @@ app = Flask(__name__,
             static_url_path='%s/static' % config.get('url', 'base'),
             static_folder='static')
 
+mongo = PyMongo(app)
 
-# Database connection
-# ----------------------------------------------------------------------------
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://%s:%s@%s:3306/%s' % (
-    config.get('db', 'user'),
-    config.get('db', 'passwd'),
-    config.get('db', 'host'),
-    config.get('db', 'db')
-)
-app.config['SQLALCHEMY_POOL_RECYCLE'] = 1800 # Recycle every 30 min.
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-db = SQLAlchemy()
-db.init_app(app)
+# # Database connection
+# # ----------------------------------------------------------------------------
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://%s:%s@%s:3306/%s' % (
+#     config.get('db', 'user'),
+#     config.get('db', 'passwd'),
+#     config.get('db', 'host'),
+#     config.get('db', 'db')
+# )
+# app.config['SQLALCHEMY_POOL_RECYCLE'] = 1800 # Recycle every 30 min.
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# db = SQLAlchemy()
+# db.init_app(app)
 
 
 if config.getboolean('mode', 'debug'):

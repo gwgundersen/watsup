@@ -5,6 +5,8 @@ from flask import Blueprint, render_template
 
 from watsup.config import config
 
+from watsup import mongo
+
 
 index = Blueprint('index',
                   __name__,
@@ -15,4 +17,7 @@ index = Blueprint('index',
 def index_page():
     """Renders index page.
     """
-    return render_template('index.html')
+
+    users = mongo.db.users.find({})
+
+    return render_template('index.html', data=list(users))
