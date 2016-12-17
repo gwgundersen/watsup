@@ -1,0 +1,386 @@
+/* Colors
+ * ------ */
+@color-navy: #17406B;
+@color-blue: #1689E5;
+@color-blue-dark: #006eb3;
+@color-green: #7FB800;
+@color-red: #D40000;
+
+@font-family-base: arial, sans-serif;
+@font-family-accent: 'Roboto';
+@font-size-base: 13px;
+
+@dim-footer-height: 50px;
+
+@background-transition: background-color 200ms linear;
+
+/* Reset
+ * ----- */
+html,
+body {
+  margin: 0;
+  font-size: @font-size-base;
+}
+
+/* Sticky Footer. Do not change.
+ * ----------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: @dim-footer-height;
+}
+
+#footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: @dim-footer-height;
+  width: 100%;
+}
+
+/* Tag and general class selectors.
+ * -------------------------------- */
+a {
+  color: @color-blue;
+  &:hover {
+    color: @color-blue-dark;
+  }
+}
+
+h1 {
+  /*border-bottom: 1px solid #eee;*/
+  a,
+  a:hover,
+  a:focus,
+  a:active,
+  span {
+    color: white;
+    font-family: @font-family-accent;
+    font-weight: 100;
+    text-decoration: none;
+  }
+  span {
+    font-size: 14px;
+  }
+}
+
+.highlight {
+  color: @color-red;
+}
+
+.btn {
+  border: none;
+  font-family: @font-family-base;
+  font-size: @font-size-base;
+  &.btn-primary {
+    background-color: @color-blue;
+    &:active {
+      background-color: #126db6;
+    }
+    &:hover {
+      background-color: #126db6;
+      -webkit-transition: @background-transition;
+      -moz-transition: @background-transition;
+      -o-transition: @background-transition;
+      -ms-transition: @background-transition;
+      transition: @background-transition;
+    }
+  }
+  &.btn-info {
+    background-color: @color-green;
+    &:active {
+      background-color: #5c8500;
+    }
+    &:hover {
+      background-color: #4C6E00;
+      -webkit-transition: @background-transition;
+      -moz-transition: @background-transition;
+      -o-transition: @background-transition;
+      -ms-transition: @background-transition;
+      transition: @background-transition;
+    }
+  }
+  &.btn-danger {
+    background-color: @color-red;
+    &:active {
+      background-color: #a10000;
+    }
+    &:hover {
+      background-color: #a10000;
+      -webkit-transition: @background-transition;
+      -moz-transition: @background-transition;
+      -o-transition: @background-transition;
+      -ms-transition: @background-transition;
+      transition: @background-transition;
+    }
+  }
+}
+
+.form-control {
+  font-family: @font-family-base;
+}
+
+/* Element selectors.
+ * ------------------ */
+#header {
+  background-color: @color-navy;
+  a,
+  .navbar-right {
+    color: white;
+    font-weight: 200;
+  }
+  h1 {
+    margin-top: 10px;
+  }
+  .pull-right {
+    font-size: 15px;
+    position: relative;
+    top: 16px;
+  }
+}
+
+#error-message {
+  background-color: #ff6f6f; /* Light red */
+  color: white;
+  padding-top: 10px;
+}
+
+#success-message {
+  background-color: @color-green;
+  color: white;
+  padding-top: 10px;
+}
+
+#months-list li,
+#category-list li {
+  margin-bottom: 10px;
+}
+
+#container {
+  height: 1000px;
+  width: 1000px;
+}
+
+.page {
+  margin-top: 20px;
+}
+
+#index-page {
+  a.btn {
+    width: 100%;
+  }
+  .row {
+    /* Prevents footer from hitting bottombutton. */
+    margin-bottom: 50px;
+  }
+}
+
+#index-page,
+#edit-page {
+  .checkbox {
+    font-size: 14px;
+    label {
+      font-weight: bold;
+    }
+  }
+  #add-btn,
+  #edit-btn {
+    /* I don't want the user to accidentally click add while trying to select
+     * mandatory.
+     */
+    margin-top: 40px;
+  }
+}
+
+#expenses-page,
+#report-page {
+  padding-bottom: 50px;
+  button,
+  a.btn {
+    width: 100%;
+  }
+  #previous-expenses-btn {
+    margin-bottom: 12px;
+  }
+  select {
+    margin-bottom: 10px;
+  }
+  #expense-controls {
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #eee;
+    padding: 20px 0 10px;
+    margin-bottom: 10px;
+    h3 {
+      margin-top: 10px;
+    }
+    #details {
+      padding-bottom: 10px;
+      p {
+        margin: 0;
+        font-size: 18px;
+        &.note {
+          margin-top: 10px;
+          font-size: 12px;
+        }
+      }
+    }
+    #previous-expenses {
+      border-right: 1px solid #ddd;
+    }
+  }
+  #breakout {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+  }
+}
+
+#expenses-page,
+#settings-page,
+#expenses-all-page {
+  table {
+    font-size: @font-size-base;
+    thead {
+      td {
+        font-weight: bold;
+      }
+    }
+    td {
+      padding: 4px;
+      vertical-align: middle;
+    }
+    form {
+      margin-bottom: 0;
+    }
+    input {
+      font-size: @font-size-base;
+    }
+  }
+}
+
+#expenses-all-page {
+  table {
+    display: none;
+  }
+  .dataTables_wrapper {
+    margin: 20px 0;
+  }
+  #previous-button a {
+    width: 120px;
+  }
+}
+
+@media (max-width: 992px) {
+  #expenses-page {
+    #expense-controls {
+      #previous-expenses {
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 14px;
+      }
+    }
+    .dataTables_wrapper {
+      margin-top: 10px;
+    }
+  }
+}
+
+.dataTables_wrapper {
+  font-family: @font-family-base;
+  div.dataTables_info {
+    font-weight: bold;
+  }
+}
+
+#months-all-page {
+  h3 {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+  }
+  #all-button {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+  }
+  a.btn {
+    width: 120px;
+  }
+  .total {
+    font-weight: bold;
+    padding-left: 10px;
+  }
+}
+
+#edit-page {
+  #delete-button {
+    border-top: 1px solid #ddd;
+    margin-top: 20px;
+    padding-top: 20px;
+    .btn {
+      width: 100%;
+    }
+  }
+}
+
+#register-page,
+#login-page {
+  button {
+    width: 100%;
+  }
+}
+
+#footer {
+  background-color: #f9f9f9;
+  border-top: 1px solid #eee;
+  .container {
+    margin-top: 10px;
+    a {
+      font-size: 14px;
+    }
+    ul {
+      margin-bottom: 3px;
+    }
+    /* Make logout button, which uses an HTML form to POST, look like a link. */
+    button {
+      border: none;
+      background-color: transparent;
+      color: @color-blue;
+      font-size: 14px;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+#account-page {
+  h2 {
+    margin-top: 0;
+  }
+  .section {
+    border-top: 1px solid #ddd;
+    margin-bottom: 50px;
+  }
+  #delete-account-section {
+    margin-top: 50px;
+    padding-top: 20px;
+  }
+}
+
+.pagination > .active > a,
+.pagination > .active > a:focus,
+.pagination > .active > a:hover,
+.pagination > .active > span,
+.pagination > .active > span:focus,
+.pagination > .active > span:hover {
+  background-color: @color-blue;
+  border-color: @color-blue;
+}
+
+.pagination > li > a,
+.pagination > li > span {
+  color: @color-blue;
+}

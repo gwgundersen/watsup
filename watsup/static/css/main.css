@@ -1,0 +1,25 @@
+/* Colors
+ * ------ */
+/* Reset
+ * ----- */
+html,
+body {
+  margin: 0;
+  font-size: 13px;
+}
+/* Sticky Footer. Do not change.
+ * ----------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 50px;
+}
+#footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 50px;
+  width: 100%;
+}
