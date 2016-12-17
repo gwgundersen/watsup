@@ -43,7 +43,8 @@ else:
 # Server endpoints
 # ----------------------------------------------------------------------------
 
-#from watsup import endpoints
+from watsup import endpoints
+app.register_blueprint(endpoints.index)
 
 
 # Error handling
