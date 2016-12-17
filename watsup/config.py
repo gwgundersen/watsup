@@ -10,13 +10,6 @@ import os
 config = ConfigParser()
 config.read('watsup/config.ini')
 
-# db_connection_args = {
-#     'user': config.get('db', 'user'),
-#     'passwd': config.get('db', 'passwd'),
-#     'db': config.get('db', 'db'),
-#     'host': config.get('db', 'host')
-# }
-
-MONGO_URL = os.environ.get('WATSUP_MONGO_URL')
-
-
+# Read MONGODB_URI and set to configuration object. We use this name because it
+# is the default environment variable on Heroku.
+config.set('db', 'MONGODB_URI', os.environ.get('MONGODB_URI'))

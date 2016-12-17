@@ -1,10 +1,9 @@
 """Configures and starts the web server.
 """
 
-from flask import Flask, g, session as flask_session, render_template
+from flask import Flask, render_template
 
-# from flask.ext.sqlalchemy import SQLAlchemy
-from flask.ext.pymongo import PyMongo
+from flask_pymongo import PyMongo
 
 from watsup.config import config
 
@@ -13,23 +12,12 @@ app = Flask(__name__,
             static_url_path='%s/static' % config.get('url', 'base'),
             static_folder='static')
 
+
+# Database connection
+# ----------------------------------------------------------------------------
 mongo = PyMongo(app)
 
-
-# # Database connection
-# # ----------------------------------------------------------------------------
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://%s:%s@%s:3306/%s' % (
-#     config.get('db', 'user'),
-#     config.get('db', 'passwd'),
-#     config.get('db', 'host'),
-#     config.get('db', 'db')
-# )
-# app.config['SQLALCHEMY_POOL_RECYCLE'] = 1800 # Recycle every 30 min.
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-# db = SQLAlchemy()
-# db.init_app(app)
-
+app.config['MONGO_URI'] = config.get('db', 'MONGODB_URI')
 
 if config.getboolean('mode', 'debug'):
     # Add a trailing slash, so the base tag URL will be "/watsup/"
