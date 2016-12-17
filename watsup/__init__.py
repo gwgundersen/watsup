@@ -1,10 +1,9 @@
 """Configures and starts the web server.
 """
 
-from flask import Flask, g, session as flask_session, render_template
+from flask import Flask, render_template
 
-# from flask.ext.sqlalchemy import SQLAlchemy
-from flask.ext.pymongo import PyMongo
+from flask_pymongo import PyMongo
 
 from watsup.config import config
 
@@ -17,6 +16,8 @@ app = Flask(__name__,
 # Database connection
 # ----------------------------------------------------------------------------
 mongo = PyMongo(app)
+
+app.config['MONGO_URI'] = config.get('db', 'MONGODB_URI')
 
 if config.getboolean('mode', 'debug'):
     # Add a trailing slash, so the base tag URL will be "/watsup/"
