@@ -36,6 +36,7 @@ else:
 
 from watsup import endpoints
 app.register_blueprint(endpoints.index)
+app.register_blueprint(endpoints.auth)
 
 
 # Error handling

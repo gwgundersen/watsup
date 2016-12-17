@@ -1,7 +1,6 @@
 """Handles application-wide configurations.
 """
 
-
 from ConfigParser import ConfigParser
 
 import os
