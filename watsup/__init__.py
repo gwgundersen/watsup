@@ -2,11 +2,10 @@
 """
 
 from flask import Flask, g, session as flask_session, render_template
-from flask.ext.login import LoginManager, current_user, user_logged_out
 
 from flask.ext.sqlalchemy import SQLAlchemy
 
-from slate.config import config
+from watsup.config import config
 
 
 app = Flask(__name__,
@@ -30,69 +29,21 @@ db.init_app(app)
 
 
 if config.getboolean('mode', 'debug'):
-    # Add a trailing slash, so the base tag URL will be "/slate/"
+    # Add a trailing slash, so the base tag URL will be "/watsup/"
     app.config.base_tag_url = '%s/' % config.get('url', 'base')
 else:
-    # Manually set the base tag URL to "/slate/". Why can't we use the config
+    # Manually set the base tag URL to "/watsup/". Why can't we use the config
     # value? Because in production, the application runs on the server in the
-    # `slate` directory. To the application in production, "/" is this
-    # directory, so "/slate" would result in a URL mapping to "/slate/slate".
-    # Yes, this is annoying.
-    app.config.base_tag_url = '/slate/'
+    # `watsup` directory. To the application in production, "/" is this
+    # directory, so "/watsup" would result in a URL mapping to
+    # "/watsup/watsup". Yes, this is annoying.
+    app.config.base_tag_url = '/watsup/'
 
 
 # Server endpoints
 # ----------------------------------------------------------------------------
-from slate import endpoints
-app.register_blueprint(endpoints.account)
-app.register_blueprint(endpoints.auth)
-app.register_blueprint(endpoints.categories)
-app.register_blueprint(endpoints.expenses)
-app.register_blueprint(endpoints.index)
-app.register_blueprint(endpoints.reports)
 
-
-# Login session management
-# ----------------------------------------------------------------------------
-# Change this key to force all users to re-authenticate.
-app.secret_key = config.get('cookies', 'secret_key')
-# Limit "remember me" cookie to path. Default is "/".
-app.config['REMEMBER_COOKIE_PATH'] = '/slate'
-
-from slate import models
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = 'auth.login'
-
-
-@app.before_request
-def before_request():
-    """
-    """
-    g.user = current_user
-
-
-@login_manager.user_loader
-def load_user(user_id):
-    """
-    """
-    user = db.session.query(models.User).get(user_id)
-    return user
-
-
-# @user_logged_out.connect_via(app)
-# def unset_current_user(sender, user):
-#     """When the user logs out, we need to unset this global variable.
-#     """
-#     print('logging user out')
-#     app.config.user = None
-
-
-@app.before_request
-def make_session_permanent():
-    """Sets Flask session to 'permanent', meaning 31 days.
-    """
-    flask_session.permanent = True
+#from watsup import endpoints
 
 
 # Error handling
