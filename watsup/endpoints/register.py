@@ -22,16 +22,6 @@ def register_user():
     if request.method == 'POST':
         required_fields = ['username', 'public_key']
 
-        # if not request.json:
-        #     print 'a'
-        #     print request
-        #     return jsonify({'Error': 'Incorrect request'}), 400 # Status BAD
-
-        # if not 'username' in request.json or not 'public_key' in request.json:
-        #     print 'b'
-        #     print request.json
-        #     return jsonify({'Error': 'Incorrect request'}), 400 # Status BAD
-
         if request.json:
             for field in required_fields:
                 if not field in request.json:
