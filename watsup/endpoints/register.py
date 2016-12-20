@@ -13,13 +13,13 @@ register = Blueprint('register',
                      url_prefix='%s/register' % config.get('url', 'base'))
 
 
-@register.route('/', methods=['GET'])
-def render_registration_page():
-    return render_template('register.html')
-
-@register.route('/', methods=['POST'])
+@register.route('/', methods=['GET', 'POST'])
 def register_user():
-    if request.method == 'POST':
+    """Render user registration page and handle user registration.
+    """
+    if request.method == 'GET':
+        return render_template('register.html')
+    else:
         required_fields = ['username', 'public_key']
 
         if request.json:
