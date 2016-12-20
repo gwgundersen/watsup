@@ -13,22 +13,45 @@ register = Blueprint('register',
                      url_prefix='%s/register' % config.get('url', 'base'))
 
 
+@register.route('/', methods=['GET'])
+def render_registration_page():
+    return render_template('register.html')
+
 @register.route('/', methods=['POST'])
 def register_user():
     if request.method == 'POST':
         required_fields = ['username', 'public_key']
 
-        if not request.json:
-            return jsonify({'Error': 'Incorrect request'}), 400 # Status BAD
+        # if not request.json:
+        #     print 'a'
+        #     print request
+        #     return jsonify({'Error': 'Incorrect request'}), 400 # Status BAD
 
-        if not 'username' in request.json or not 'public_key' in request.json:
-            return jsonify({'Error': 'Incorrect request'}), 400 # Status BAD
+        # if not 'username' in request.json or not 'public_key' in request.json:
+        #     print 'b'
+        #     print request.json
+        #     return jsonify({'Error': 'Incorrect request'}), 400 # Status BAD
 
-        user_name = escape(request.json['username'])
-        
-        # NOTE(tfs,2016/12/19): Just storing raw data for now,
-        #                       still not entirely sure how formats will work out.
-        user_key = request.json['public_key']
+        if request.json:
+            for field in required_fields:
+                if not field in request.json:
+                    return jsonify({'Error': 'Poorly formed request'}), 400 # Status BAD
+
+            user_name = escape(request.json['username'])
+            
+            # NOTE(tfs,2016/12/19): Just storing raw data for now,
+            #                       still not entirely sure how formats will work out.
+            user_key = request.json['public_key']
+        elif request.form:
+            for field in required_fields:
+                if not field in request.form:
+                    return jsonify({'Error': 'Poorly formed request'}), 400 # Status BAD
+
+            user_name = escape(request.form['username'])
+            user_key = request.form['public_key']
+
+        else:
+            return jsonify({'Error': 'Poorly formed request'}), 400
 
         old_user = mongo.db.users.find({'username': user_name})
 

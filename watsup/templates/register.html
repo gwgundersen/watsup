@@ -1,0 +1,25 @@
+<!DOCTYPE HTML PUBLIC=''>
+<html>
+
+{% include 'head.html' %}
+
+<body>
+
+{% include 'header.html' %}
+
+<div id='index-page' class='page container'>
+
+
+	<form action="/watsup/register/" method="POST" id="registration">
+		<input type="text" name="username" placeholder="username"/><br />
+		<input type="password" name="public_key" placeholder="password"/><br />
+		<input type="password" name="public_key2" placeholder="confirm"/><br />
+	</form>
+
+	<button type="submit" form="registration" value="Submit">Submit</button>
+
+    {% include 'footer.html' %}
+
+</div>
+</body>
+</html>

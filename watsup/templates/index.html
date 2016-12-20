@@ -14,7 +14,7 @@
     </div>
 
     {% for user in data %}
-        <div> {{loop.index}}: User {{ user.username }} says "{{ user.secret }}" </div>
+        <div> {{loop.index}}: User {{ user.username }} says "{{ user.public_key }}" </div>
     {% else %}
         <div> Too scared to share a secret? </div>
     {% endfor %}
