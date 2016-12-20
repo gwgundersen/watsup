@@ -4,7 +4,6 @@
 from flask import Blueprint, render_template, request, escape, jsonify
 
 from watsup.config import config
-
 from watsup import mongo
 
 login = Blueprint('login',
@@ -12,15 +11,13 @@ login = Blueprint('login',
                   url_prefix='%s/login' % config.get('url', 'base'))
 
 
-@login.route('/', methods=['GET'])
-def render_login_page():
-    """Renders login page.
-    """
-    return render_template('login.html')
-
-@login.route('/', methods=['POST'])
+@login.route('/', methods=['GET', 'POST'])
 def login_user():
-    if request.method == 'POST':
+    """Renders login page and handles login request.
+    """
+    if request.method == 'GET':
+        return render_template('login.html')
+    else:
         required_fields = ['username', 'password']
 
         if request.json:
@@ -51,9 +48,8 @@ def login_user():
         user_list = list(users)
 
         if len(user_name_list) == 0:
-        	return jsonify({'Error': 'User not registered'}), 401 # Status UNAUTHORIZED
+            return jsonify({'Error': 'User not registered'}), 401 # Status UNAUTHORIZED
         elif len(user_list) == 0:
-        	return jsonify({'Error': 'Bad username/password combination'}), 401
+            return jsonify({'Error': 'Bad username/password combination'}), 401
         else:
-        	return jsonify('Temporary confirmation page'), 200
-   
+            return jsonify('Temporary confirmation page'), 200
