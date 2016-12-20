@@ -16,13 +16,21 @@ register = Blueprint('register',
 @register.route('/', methods=['POST'])
 def register_user():
     if request.method == 'POST':
-        u_name = escape(request.json['username'])
+        required_fields = ['username', 'public_key']
+
+        if not request.json:
+            return jsonify({'Error': 'Incorrect request'}), 400 # Status BAD
+
+        if not 'username' in request.json or not 'public_key' in request.json:
+            return jsonify({'Error': 'Incorrect request'}), 400 # Status BAD
+
+        user_name = escape(request.json['username'])
         
         # NOTE(tfs,2016/12/19): Just storing raw data for now,
         #                       still not entirely sure how formats will work out.
-        u_key = request.json['publickey']
+        user_key = request.json['public_key']
 
-        old_user = mongo.db.users.find({'username': u_name})
+        old_user = mongo.db.users.find({'username': user_name})
 
         old_user_list = list(old_user)
         
@@ -30,7 +38,7 @@ def register_user():
             content = {'Error': 'User already exists'}
             return jsonify(content), 409 # Status CONFLICT
         else:
-            mongo.db.users.insert({'username': u_name, 'publickey': u_key})
+            mongo.db.users.insert({'username': user_name, 'public_key': user_key})
             return jsonify("Success"), 200 # Status OK
 
 
