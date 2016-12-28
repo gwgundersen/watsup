@@ -21,8 +21,8 @@ def encrypt_nonce(nonce, pub_key_data):
     return ciphertext
 
 
-def generate_nonce(length=8):
-    """Generate pseudorandom number. Credit:
-    https://github.com/joestump/python-oauth2/blob/81326a07d1936838d844690b468660452aafdea9/oauth2/__init__.py#L165
+def generate_nonce():
+    """Generate pseudorandom number with cryptographically secure SystemRandom.
+    Credit: https://github.com/joestump/python-oauth2/blob/master/oauth2/__init__.py#L510
     """
-    return ''.join([str(random.randint(0, 9)) for i in range(length)])
+    return str(random.SystemRandom().randint(0, 100000000))
