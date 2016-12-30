@@ -1,7 +1,7 @@
 """User authentication pages and API.
 """
 
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 
 from watsup.config import config
 from watsup import mongo, crypto
@@ -16,18 +16,20 @@ auth = Blueprint('auth',
 def request_nonce():
     """Renders index page.
     """
+
     username = request.form.get('username')
     user = mongo.db.users.find_one({'username': username})
 
     # Generate, save, and encrypt nonce.
     nonce = crypto.generate_nonce()
-    user['nonce'] = nonce
+    user['password'] = nonce
     mongo.db.users.save(user)
     pub_key_data = user['public_key']
     print(nonce)
     ciphertext = crypto.encrypt_nonce(nonce, pub_key_data)
 
-    return ciphertext
+    # return ciphertext
+    return jsonify(nonce) # For debugging purposes
 
 
 @auth.route('/', methods=['GET'])
