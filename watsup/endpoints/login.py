@@ -47,9 +47,12 @@ def login_user():
         user_name_list = list(users_by_name)
         user_list = list(users)
 
+        saved_otp = user_name_list[0]['password']
+
         if len(user_name_list) == 0:
             return jsonify({'Error': 'User not registered'}), 401 # Status UNAUTHORIZED
         elif len(user_list) == 0:
-            return jsonify({'Error': 'Bad username/password combination'}), 401
+            errorString = "Bad user/pass combination. Expected nonce: " + saved_otp
+            return jsonify({'Error': errorString}), 401
         else:
             return jsonify('Temporary confirmation page'), 200
