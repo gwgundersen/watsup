@@ -28,8 +28,7 @@ def request_nonce():
     print(nonce)
     ciphertext = crypto.encrypt_nonce(nonce, pub_key_data)
 
-    # return ciphertext
-    return jsonify(nonce) # For debugging purposes
+    return ciphertext
 
 
 @auth.route('/', methods=['GET'])
