@@ -1,10 +1,7 @@
-"""Configures and starts the web server.
-"""
+""" Configures and starts the web server """
 
 from flask import Flask, render_template
-
 from flask_pymongo import PyMongo
-
 from watsup.config import config
 
 
